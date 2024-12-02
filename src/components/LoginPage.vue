@@ -8,6 +8,7 @@
         <p>
             <router-link to="/sign-up">Sign Up</router-link>
         </p>
+        <div v-if="errorMessage" class="errorMsg">{{ errorMessage }}</div>
     </div>
 </template>
 
@@ -19,21 +20,37 @@ export default {
     {
         return {
             email: '',
-            password: ''
+            password: '',
+            errorMessage: ""
         }
     },
     methods:{
         async login()
         {
-            let result = await axios.get(
-                `http://localhost:3000/users?email=${this.email}&password=${this.password}`
-            )
-            console.warn(result)
-            if(result.status==200 && result.data.length > 0)
-            {
-                localStorage.setItem('User-Info', JSON.stringify(result.data[0]));
-                this.$router.push({name:'HomePage'})
+            this.errorMessage = "";
+
+            if (!this.email || !this.password) {
+                this.errorMessage = "Preencha todos os campos!";
+                return;
             }
+            try
+            {
+                let result = await axios.get(
+                    `http://localhost:3000/users?email=${this.email}&password=${this.password}`
+                )
+                if(result.status==200 && result.data.length > 0)
+                {
+                    localStorage.setItem('User-Info', JSON.stringify(result.data[0]));
+                    this.$router.push({name:'HomePage'})
+                }
+                else{
+                    this.errorMessage = "Credenciais inválidas!";
+                    return;
+                }
+            } catch (error){
+                this.errorMessage = "Erro no servidor. Tente novamente mais tarde."
+            }
+
         },
         mounted()
         {

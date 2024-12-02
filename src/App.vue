@@ -52,4 +52,10 @@ body {
     margin-left: 22%;
     background-color: #a3f2f2;
 }
+
+.errorMsg{
+  color: #ff0000;
+  margin-top: 10px;
+  font-size: 14px;
+}
 </style>

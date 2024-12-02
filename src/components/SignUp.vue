@@ -9,6 +9,7 @@
         <p>
             <router-link to="/login">Login</router-link>
         </p>
+        <div v-if="errorMessage" class="errorMsg">{{ errorMessage }}</div>
     </div>
 
 </template>
@@ -21,31 +22,63 @@ export default {
         return{
             name:'',
             email:'',
-            password:''
+            password:'',
+            errorMessage: ""
         }
     },
     methods:{
         async signUp() 
         {
+            this.errorMessage = "";
+
+            if (!this.email || !this.password) {
+                this.errorMessage = "Preencha todos os campos!";
+                return;
+            }
+
+            if (!this.validateEmail()){
+                this.errorMessage = "Email em formato inválido!";
+                return;
+            }
+            if (!this.validatePassword()) {
+                this.errorMessage = "Senha deve possuir ao menos um dígito, uma letra e no mínimo 8 caracteres.";
+                return;
+            }
+
             let user = {
                 name:this.name,
                 email:this.email, 
                 password:this.password
             }
-            if (user.name == '' || user.email == '' || user.password == ''){    //implementar aviso na página html
-                console.warn("Campos Vazios")
-            }
-            else{
-                let result = await axios.post("http://localhost:3000/users", user);
 
-                console.warn(result)
-                if(result.status==201)
-                {
-                    localStorage.setItem('User-Info', JSON.stringify(result.data));
-                    this.$router.push({name:'HomePage'})
-                        
-                }
+            let result = await axios.post("http://localhost:3000/users", user);
+
+            if(result.status==201)
+            {
+                localStorage.setItem('User-Info', JSON.stringify(result.data));
+                this.$router.push({name:'HomePage'})
+                    
             }
+        },
+        validateEmail(){
+            this.errorMessage = "";
+
+            let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            if(!emailRegex.test(this.email)){
+                return false;
+            }
+            return true;
+        },
+        validatePassword(){
+            this.errorMessage = "";
+
+            let passwRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+            if(!passwRegex.test(this.password)){
+                return false;
+            }
+            return true;
         },
         mounted()
         {
