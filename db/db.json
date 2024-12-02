@@ -1,0 +1,60 @@
+{
+  "users": [
+    {
+      "id": "d1a4",
+      "name": "Fulano da Silva",
+      "email": "Fulano123Silva@teste.com",
+      "password": "Ful@123Silva"
+    },
+    {
+      "id": "7b48",
+      "name": "marcelo",
+      "email": "marcelo@teste.com",
+      "password": "12345"
+    },
+    {
+      "id": "5388",
+      "name": "a",
+      "email": "a",
+      "password": "a"
+    },
+    {
+      "id": "65cf",
+      "name": "marcos",
+      "email": "m4rcos@teste.com",
+      "password": "m1234"
+    },
+    {
+      "id": "3828",
+      "name": "Gabriel",
+      "email": "gabriel2003@teste.com",
+      "password": "12345"
+    }
+  ],
+  "restaurants": [
+    {
+      "id": "1234",
+      "name": "Burger King",
+      "contact": 3438406634,
+      "address": "Av. Maria Silva Garcia, 286"
+    },
+    {
+      "id": "4321",
+      "name": "Domino's",
+      "contact": 3432927070,
+      "address": "Av. Rondon Pacheco, 4042"
+    },
+    {
+      "id": "3e10",
+      "name": "McDonald's",
+      "contact": 3438400100,
+      "address": "Av. Floriano Peixoto, 170"
+    },
+    {
+      "name": "Restaurante Teste",
+      "address": "Rua dos Bobos, 0",
+      "contact": "34912344000",
+      "id": "f1b3"
+    }
+  ]
+}
