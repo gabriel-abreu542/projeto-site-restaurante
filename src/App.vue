@@ -3,6 +3,9 @@
 </template>
 
 <script>
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 export default {
   name: 'App',
 
@@ -46,11 +49,6 @@ body {
     background: skyblue;
     color: #fff;
     cursor: pointer;
-}
-
-.table{
-    margin-left: 22%;
-    background-color: #a3f2f2;
 }
 
 .errorMsg{

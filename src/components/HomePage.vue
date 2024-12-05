@@ -1,20 +1,31 @@
 <template>
     <HeaderComponent />
     <h1>Olá {{name}}, bem vindo à Página inicial</h1>
-    <table class="table" border="1">
-        <tr>
-            <td>Name</td>
-            <td>Contact</td>
-            <td>Address</td>
-            <td>Actions</td>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Address</th>
+            <th>Actions</th>
         </tr>
-        <tr v-for="item in restaurant" :key="item.id">
-        <td>{{item.name}}</td>
-        <td>{{item.contact}}</td>
-        <td>{{item.address}}</td>
-        <td><router-link :to="'/update-restaurant/'+item.id">Update</router-link></td>
-        <button v-on:click="deleteRestaurant(item.id)">Delete</button>
-        </tr>
+        </thead>
+        <tbody>
+            <tr v-for="item in restaurant" :key="item.id">
+                <td>{{item.name}}</td>
+                <td>{{item.contact}}</td>
+                <td>{{item.address}}</td>
+                <td>
+                    <router-link :to="'/update-restaurant/'+item.id" class="btn btn-primary btn-sm">
+                        Update
+                    </router-link>
+                    <button @click="deleteRestaurant(item.id)" class="btn btn-danger btn-sm">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+        
     </table>
 </template>
 <script>
@@ -64,10 +75,3 @@ export default {
         }
 }
 </script>
-
-<style>
-td {
-    width: 160px;
-    height: 40px;
-}
-</style>
